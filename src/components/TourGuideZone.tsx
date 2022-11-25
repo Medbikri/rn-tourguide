@@ -17,7 +17,7 @@ export interface TourGuideZoneProps {
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number
   borderRadiusObject?: BorderRadiusObject
-  config?: Object
+  config?: any
 }
 
 export const TourGuideZone = ({
