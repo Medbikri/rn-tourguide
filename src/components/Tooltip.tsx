@@ -4,7 +4,6 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { Button } from './Button'
 import styles from './style'
 import { IStep, Labels } from '../types'
-import { useEffect } from 'react'
 
 export interface TooltipProps {
   isFirstStep?: boolean

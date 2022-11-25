@@ -7,7 +7,6 @@ import {
   StatusBar,
   StyleProp,
   StyleSheet,
-  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native'

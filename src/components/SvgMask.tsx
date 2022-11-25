@@ -10,7 +10,6 @@ import {
   ViewStyle,
   TouchableWithoutFeedback,
   ScaledSize,
-  TouchableOpacity,
 } from 'react-native'
 import Svg, { PathProps } from 'react-native-svg'
 import { IStep, ValueXY } from '../types'
@@ -194,7 +193,7 @@ export class SvgMask extends Component<Props, State> {
         style={[this.props.style]}
         onLayout={this.handleLayout}
         pointerEvents='none'
-        onPress={(event) => {
+        onPress={() => {
           // console.log('PRESS COORDINATES : ', event.nativeEvent.locationX)
 
           if (dismissOnPress) {
