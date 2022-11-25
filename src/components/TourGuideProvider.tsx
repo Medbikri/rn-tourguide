@@ -184,6 +184,8 @@ export const TourGuideProvider = ({
   }
 
   const registerStep = (key: string, step: IStep) => {
+    // console.log('REGISTER STEP : Provider', step.config)
+
     setSteps((previousSteps) => {
       const newSteps = { ...previousSteps }
       newSteps[key] = {
@@ -255,6 +257,7 @@ export const TourGuideProvider = ({
             next,
             prev,
             stop,
+            // config: steps[tourKey][`${currentStep[tourKey]?.order}`].config,
             visible: visible[tourKey],
             isFirstStep: isFirstStep[tourKey],
             isLastStep: isLastStep[tourKey],

@@ -7,6 +7,7 @@ import {
   StatusBar,
   StyleProp,
   StyleSheet,
+  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native'
@@ -26,6 +27,7 @@ export interface ModalProps {
   animationDuration?: number
   tooltipComponent: React.ComponentType<TooltipProps>
   tooltipStyle?: StyleProp<ViewStyle>
+  config: any
   maskOffset?: number
   borderRadius?: number
   borderRadiusObject?: BorderRadiusObject
@@ -76,6 +78,7 @@ export class Modal extends React.Component<ModalProps, State> {
     labels: {},
     isHorizontal: false,
     preventOutsideInteraction: false,
+    config: { tipPosition: 1 },
   }
 
   layout?: Layout = {
@@ -191,9 +194,9 @@ export class Modal extends React.Component<ModalProps, State> {
       verticalPosition === 'bottom'
         ? tooltip.top
         : obj.top -
-        MARGIN -
-        135 -
-        (this.props.currentStep!.tooltipBottomOffset || 0)
+          MARGIN -
+          135 -
+          (this.props.currentStep!.tooltipBottomOffset || 0)
     const translateAnim = Animated.timing(this.state.tooltipTranslateY, {
       toValue,
       duration,
@@ -307,18 +310,22 @@ export class Modal extends React.Component<ModalProps, State> {
           handlePrev={this.handlePrev}
           handleStop={this.handleStop}
           labels={this.props.labels}
+          config={this.props.config}
         />
       </Animated.View>
     )
   }
 
   renderNonInteractionPlaceholder() {
-    return this.props.preventOutsideInteraction ? <View
-      style={[StyleSheet.absoluteFill, styles.nonInteractionPlaceholder]} /> : null
+    return this.props.preventOutsideInteraction ? (
+      <View
+        style={[StyleSheet.absoluteFill, styles.nonInteractionPlaceholder]}
+      />
+    ) : null
   }
 
-
   render() {
+    // console.log('CONFIG IN Modal', this.props.config)
     const containerVisible = this.state.containerVisible || this.props.visible
     const contentVisible = this.state.layout && containerVisible
     if (!containerVisible) {
@@ -334,8 +341,6 @@ export class Modal extends React.Component<ModalProps, State> {
           onLayout={this.handleLayoutChange}
           pointerEvents='box-none'
         >
-
-
           {contentVisible && (
             <>
               {this.renderMask()}

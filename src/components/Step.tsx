@@ -16,9 +16,12 @@ interface Props {
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number
   borderRadiusObject?: BorderRadiusObject
+  config: any
 }
 
 export const Step = (props: Props) => {
   const context = React.useContext(TourGuideContext)
+  // console.log('CONFIG IN Step', props.config)
+
   return <ConnectedStep {...{ ...props, context }} />
 }

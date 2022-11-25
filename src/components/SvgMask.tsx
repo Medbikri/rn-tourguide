@@ -10,6 +10,7 @@ import {
   ViewStyle,
   TouchableWithoutFeedback,
   ScaledSize,
+  TouchableOpacity,
 } from 'react-native'
 import Svg, { PathProps } from 'react-native-svg'
 import { IStep, ValueXY } from '../types'
@@ -190,25 +191,34 @@ export class SvgMask extends Component<Props, State> {
 
     return (
       <Wrapper
-        style={this.props.style}
+        style={[this.props.style]}
         onLayout={this.handleLayout}
         pointerEvents='none'
-        onPress={dismissOnPress ? stop : undefined}
+        onPress={(event) => {
+          // console.log('PRESS COORDINATES : ', event.nativeEvent.locationX)
+
+          if (dismissOnPress) {
+            console.log('<PRESSED OUTSIDE>:STOPPING THE TOUR')
+            stop()
+          }
+        }}
       >
-        <Svg
-          pointerEvents='none'
-          width={this.state.canvasSize.x}
-          height={this.state.canvasSize.y}
-        >
-          <AnimatedSvgPath
-            ref={this.mask}
-            fill={this.props.backdropColor}
-            strokeWidth={0}
-            fillRule='evenodd'
-            d={this.firstPath}
-            opacity={this.state.opacity as any}
-          />
-        </Svg>
+        <View>
+          <Svg
+            pointerEvents='none'
+            width={this.state.canvasSize.x}
+            height={this.state.canvasSize.y}
+          >
+            <AnimatedSvgPath
+              ref={this.mask}
+              fill={this.props.backdropColor}
+              strokeWidth={0}
+              fillRule='evenodd'
+              d={this.firstPath}
+              opacity={this.state.opacity as any}
+            />
+          </Svg>
+        </View>
       </Wrapper>
     )
   }

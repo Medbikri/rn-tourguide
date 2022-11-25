@@ -18,11 +18,15 @@ interface Props {
   borderRadius?: number
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number
+  config?: any
 }
 
 export class ConnectedStep extends React.Component<Props> {
   static defaultProps = {
     active: true,
+    config: {
+      tipPosition: '_DEFAULT',
+    },
   }
   wrapper: any
   componentDidMount() {
@@ -50,6 +54,8 @@ export class ConnectedStep extends React.Component<Props> {
   }
 
   register() {
+    // console.log('CONFIG WHILE REGISTERING : CONNECTEDSTEP', this.props.config)
+
     if (this.props.context && this.props.context.registerStep) {
       this.props.context.registerStep(this.props.tourKey, {
         target: this,
